@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.lang.reflect.Member;
 import android.os.Build;
 
+import lab.galaxy.yahfa.demoPlugin.Hook_ActivityThread_handleBindApplication;
+
 /**
  * Created by liuruikai756 on 28/03/2017.
  */
@@ -26,6 +28,25 @@ public class HookMain {
 //        isDebugModeEnabledR = b;
 //    }
 
+    private static Object sVmRuntime;
+    private static Method setHiddenApiExemptions;
+
+    static {
+        try {
+            Method forName = Class.class.getDeclaredMethod("forName", String.class);
+            Method getDeclaredMethod = Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class);
+
+            Log.e(TAG, "getDeclaredMethod:" + getDeclaredMethod);
+
+            Class<?> vmRuntimeClass = (Class<?>) forName.invoke(null, "dalvik.system.VMRuntime");
+            Method getRuntime = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "getRuntime", null);
+            setHiddenApiExemptions = (Method) getDeclaredMethod.invoke(vmRuntimeClass, "setHiddenApiExemptions", new Class[]{String[].class});
+            sVmRuntime = getRuntime.invoke(null);
+        } catch (Throwable e) {
+            Log.e(TAG, "reflect bootstrap failed:", e);
+        }
+    }
+
     static {
         System.loadLibrary("yahfa");
         // Android SDK Ver
@@ -40,6 +61,12 @@ public class HookMain {
         }
         init(buildSdk);
     }
+
+    public static void hook_all(final Object context) {
+        Log.e(TAG, "enter hookAll");
+        doHookItemDefault(HookMain.class.getClassLoader(), Hook_ActivityThread_handleBindApplication.class.getName(), null);
+    }
+
 
     public static void doHookDefault(ClassLoader patchClassLoader, ClassLoader originClassLoader) {
         try {
@@ -210,6 +237,7 @@ public class HookMain {
     public static native Object findMethodNative(Class targetClass, String methodName, String methodSig);
 
     private static native void init(int sdkVersion);
+
 
     public static class Utils {
         // https://github.com/PAGalaxyLab/YAHFA/pull/133#issuecomment-743728607

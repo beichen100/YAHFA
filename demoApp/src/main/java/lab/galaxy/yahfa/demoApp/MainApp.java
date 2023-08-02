@@ -21,13 +21,13 @@ public class MainApp extends Application {
         try {
         /*
         Build and put the demoPlugin apk in sdcard before running the demoApp
-         */
-            ClassLoader classLoader = getClassLoader();
-
-            DexClassLoader dexClassLoader = new DexClassLoader(
-                    new File(Environment.getExternalStorageDirectory(), "demoPlugin-debug.apk").getAbsolutePath(),
-                    getCodeCacheDir().getAbsolutePath(), null, classLoader);
-            HookMain.doHookDefault(dexClassLoader, classLoader);
+         */            ClassLoader classLoader = getClassLoader();
+//
+//            DexClassLoader dexClassLoader = new DexClassLoader(
+//                    new File(Environment.getExternalStorageDirectory(), "demoPlugin-debug.apk").getAbsolutePath(),
+//                    getCodeCacheDir().getAbsolutePath(), null, classLoader);
+//            HookMain.doHookDefault(dexClassLoader, classLoader);
+//
         } catch (Exception e) {
             e.printStackTrace();
         }
