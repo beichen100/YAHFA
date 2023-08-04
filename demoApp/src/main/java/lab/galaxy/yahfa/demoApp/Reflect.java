@@ -1,14 +1,17 @@
 package lab.galaxy.yahfa.demoApp;
 
 import static android.os.Build.VERSION.SDK_INT;
+
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class Reflect {
+//    private static final String TAG = "Reflect";
 
 
 public static int rmHideApi(){
@@ -38,13 +41,13 @@ public static int rmHideApi(){
         try {
             cls = Class.forName(clsName, true, context.getClassLoader());
         } catch (Throwable e) {
-            Log.e("reflect","error in reflect.findclass");
+            Log.e("[error]", "findClass failed:", e);
         }
         if (cls == null) {
             try {
                 cls = Class.forName(clsName);
             } catch (Throwable e) {
-                Log.e("reflect","error in reflect.findclass");
+                Log.e("[error]", "findClass failed:", e);
             }
         }
         return cls;

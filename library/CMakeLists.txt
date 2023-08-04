@@ -29,17 +29,18 @@ add_library( # Specifies the name of the library.
              src/main/jni/HookMain.c 
              src/main/jni/trampoline.c
              src/main/jni/utils.c
+
+             src/main/jni/dlfunc.c
+             src/main/jni/fake_dlopen.c
 )
 
 # class visibly init only needed after Android R for arm
 if(${ANDROID_ABI} MATCHES "arm")
-    find_package(dlfunc REQUIRED CONFIG)
     target_link_libraries( # Specifies the target library.
             yahfa
 
             # Links the log library to the target library.
             ${log-lib}
-            dlfunc::dlfunc
     )
 else()
     target_link_libraries( # Specifies the target library.

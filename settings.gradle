@@ -1,1 +1,2 @@
 include ':demoApp', ':library', ':demoPlugin'
+include ':mylibrary'

@@ -22,31 +22,16 @@ public class MainActivity extends Activity {
         findViewById(R.id.hookBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Method hook = Hook_Log_e.class.getDeclaredMethod("hook", String.class, String.class);
-                    Method backup = Hook_Log_e.class.getDeclaredMethod("backup", String.class, String.class);
-                    HookMain.findAndBackupAndHook(Log.class, Hook_Log_e.methodName, Hook_Log_e.methodSig, hook, backup);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
+                //                    Method hook = Hook_Log_e.class.getDeclaredMethod("hook", String.class, String.class);
+//                    Method backup = Hook_Log_e.class.getDeclaredMethod("backup", String.class, String.class);
+//                    HookMain.findAndBackupAndHook(Log.class, Hook_Log_e.methodName, Hook_Log_e.methodSig, hook, backup);
 
-                try {
-                    SystemPropertyPook.HelloPookSystemProps(getApplication());
-                    Log.e("xiehao:", "HelloPookSystemProps end");
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
+                HookMain.hook_all();
+
+
             }
         });
 
-                findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.getProperty("xxxxx");
-
-                Log.e("xiehao", "test end  " + getPackageName());
-            }
-        });
 
 
     }

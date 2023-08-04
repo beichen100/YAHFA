@@ -7,10 +7,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.lang.reflect.Member;
-import android.os.Build;
 
-import lab.galaxy.yahfa.demoPlugin.Hook_ActivityThread_handleBindApplication;
+import android.os.Build;
 
 /**
  * Created by liuruikai756 on 28/03/2017.
@@ -62,7 +60,7 @@ public class HookMain {
         init(buildSdk);
     }
 
-    public static void hook_all(final Object context) {
+    public static void hook_all() {
         Log.e(TAG, "enter hookAll");
         doHookItemDefault(HookMain.class.getClassLoader(), Hook_ActivityThread_handleBindApplication.class.getName(), null);
     }
