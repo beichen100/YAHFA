@@ -37,10 +37,10 @@ void Java_lab_galaxy_yahfa_HookMain_init(JNIEnv *env, jclass clazz, jint sdkVers
             //OFFSET_dex_method_index_in_ArtMethod = 4*3;
             if (sdkVersion >= __ANDROID_API_S__)
                 OFFSET_entry_point_from_quick_compiled_code_in_ArtMethod =
-                    roundUpToPtrSize(4 * 3 + 2 * 2) + pointer_size;
+                        roundUpToPtrSize(4 * 3 + 2 * 2) + pointer_size;
             else
                 OFFSET_entry_point_from_quick_compiled_code_in_ArtMethod =
-                    roundUpToPtrSize(4 * 4 + 2 * 2) + pointer_size;
+                        roundUpToPtrSize(4 * 4 + 2 * 2) + pointer_size;
             break;
         case __ANDROID_API_O_MR1__:
             kAccCompileDontBother = 0x02000000;
@@ -130,7 +130,7 @@ static int replaceMethod(void *fromMethod, void *toMethod, int isBackup) {
     );
     if (newEntrypoint) {
         writeAddr((char *) fromMethod + OFFSET_entry_point_from_quick_compiled_code_in_ArtMethod,
-                newEntrypoint);
+                  newEntrypoint);
     } else {
         LOGE("failed to allocate space for trampoline of target method");
         return 1;
@@ -139,7 +139,7 @@ static int replaceMethod(void *fromMethod, void *toMethod, int isBackup) {
     if (OFFSET_entry_point_from_interpreter_in_ArtMethod != 0) {
         void *interpEntrypoint = readAddr((char *) toMethod + OFFSET_entry_point_from_interpreter_in_ArtMethod);
         writeAddr((char *) fromMethod + OFFSET_entry_point_from_interpreter_in_ArtMethod,
-                interpEntrypoint);
+                  interpEntrypoint);
     }
 
     // set the target method to native so that Android O wouldn't invoke it with interpreter

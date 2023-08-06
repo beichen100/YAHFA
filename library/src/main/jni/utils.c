@@ -138,7 +138,7 @@ static int findInitClassSymbols(JNIEnv *env) {
 //        return 1;
 //    }
 
-    void *handle = art_dlopen("libart.so", RTLD_LAZY);
+    void *handle = art_dlopen(0, RTLD_LAZY);
     if(handle == NULL) {
         LOGE("failed to find libart.so handle");
         return 1;
