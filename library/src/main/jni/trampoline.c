@@ -6,8 +6,8 @@
 #include <errno.h>
 #include <unistd.h>
 
-#include "common.h"
-#include "trampoline.h"
+#include "include/common.h"
+#include "include/trampoline.h"
 
 static unsigned char *currentTrampolineOff = 0;
 static unsigned char *trampolineSpaceEnd = 0;

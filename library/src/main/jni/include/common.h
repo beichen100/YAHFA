@@ -4,9 +4,9 @@
 #ifndef YAHFA_COMMON_H
 #define YAHFA_COMMON_H
 
-#include <jni.h>
-#include <android/log.h>
-#include <stdint.h>
+#include "../../../../../../AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/jni.h"
+#include "../../../../../../AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/android/log.h"
+#include "../../../../../../AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/lib64/clang/9.0.8/include/stdint.h"
 
 // Android 13
 #ifndef __ANDROID_API_T__

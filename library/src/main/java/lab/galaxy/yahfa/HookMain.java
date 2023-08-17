@@ -47,6 +47,7 @@ public class HookMain {
 
     static {
         System.loadLibrary("yahfa");
+        //System.load("/data/data/lab.galaxy.yahfa.demoApp/lib/yahfa.so");
         // Android SDK Ver
         int buildSdk = Build.VERSION.SDK_INT;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

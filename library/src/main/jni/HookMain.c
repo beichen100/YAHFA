@@ -1,8 +1,9 @@
 #include <jni.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include "common.h"
-#include "trampoline.h"
+#include "include/common.h"
+#include "include/trampoline.h"
 
 int SDKVersion;
 static uint32_t OFFSET_entry_point_from_interpreter_in_ArtMethod;
@@ -17,7 +18,12 @@ static uint32_t kAccPreCompiled = 0x00200000;
 static jfieldID fieldArtMethod = NULL;
 
 
-void Java_lab_galaxy_yahfa_HookMain_init(JNIEnv *env, jclass clazz, jint sdkVersion) {
+//com.android.flinger.yafya
+//com_android_flinger_yafya
+
+
+
+JNIEXPORT void JNICALL Java_lab_galaxy_yahfa_HookMain_init(JNIEnv *env, jclass clazz, jint sdkVersion) {
     SDKVersion = sdkVersion;
     jclass classExecutable;
     LOGI("init to SDK %d", sdkVersion);
@@ -193,7 +199,7 @@ static int doBackupAndHook(void *targetMethod, void *hookMethod, void *backupMet
 
     res += replaceMethod(targetMethod, hookMethod, 0);
 
-    LOGI("hook and backup done");
+    LOGI("hook and backup done ==%p, %p", targetMethod, hookMethod);
     return res;
 }
 
@@ -216,9 +222,9 @@ static void *getArtMethod(JNIEnv *env, jobject jmethod) {
 
 }
 
-jobject Java_lab_galaxy_yahfa_HookMain_findMethodNative(JNIEnv *env, jclass clazz,
-                                                        jclass targetClass, jstring methodName,
-                                                        jstring methodSig) {
+JNIEXPORT jobject JNICALL Java_lab_galaxy_yahfa_HookMain_findMethodNative(JNIEnv *env, jclass clazz,
+                                                                                    jclass targetClass, jstring methodName,
+                                                                                    jstring methodSig) {
     const char *c_methodName = (*env)->GetStringUTFChars(env, methodName, NULL);
     const char *c_methodSig = (*env)->GetStringUTFChars(env, methodSig, NULL);
     jobject ret = NULL;
@@ -242,10 +248,10 @@ jobject Java_lab_galaxy_yahfa_HookMain_findMethodNative(JNIEnv *env, jclass claz
     (*env)->ReleaseStringUTFChars(env, methodSig, c_methodSig);
     return ret;
 }
-
-jboolean Java_lab_galaxy_yahfa_HookMain_backupAndHookNative(JNIEnv *env, jclass clazz,
-                                                            jobject target, jobject hook,
-                                                            jobject backup) {
+JNIEXPORT jboolean JNICALL
+Java_lab_galaxy_yahfa_HookMain_backupAndHookNative(JNIEnv *env, jclass clazz,
+                                                             jobject target, jobject hook,
+                                                             jobject backup) {
 
 
 
@@ -261,3 +267,10 @@ jboolean Java_lab_galaxy_yahfa_HookMain_backupAndHookNative(JNIEnv *env, jclass 
         return JNI_FALSE;
     }
 }
+
+
+
+
+
+
+

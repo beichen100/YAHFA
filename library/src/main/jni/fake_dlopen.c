@@ -4,7 +4,7 @@
 #include <elf.h>
 #include <string.h>
 #include <dlfcn.h>
-#include "common.h"
+#include "include/common.h"
 
 #define LINKER "/system/bin/linker"
 
